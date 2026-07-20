@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VERI · 신뢰도 검증 챗봇</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <div class="sidebar-top-row">
+        <div class="brand">
+          <div class="brand-mark">V</div>
+          <div>
+            <h1>VERI</h1>
+            <p class="brand-sub">신뢰도 검증 챗봇</p>
+          </div>
+        </div>
+        <button id="collapseSidebarBtn" class="icon-btn collapse-btn" title="사이드바 접기/펴기">⟨</button>
+      </div>
+      <button id="settingsBtn" class="settings-btn" title="설정">⚙<span class="btn-label"> 설정</span></button>
+    </div>
+    <div class="history-panel">
+      <div class="history-header">
+        <span>대화 기록</span>
+        <button id="newChatBtn" class="new-chat-btn">+ 새 대화</button>
+      </div>
+      <input type="text" id="searchInput" class="search-input" placeholder="대화 내용 검색...">
+      <div class="history-list" id="historyList"></div>
+    </div>
+  </aside>
+  <main class="chat-area">
+    <div class="chat-log" id="chatLog">
+      <div class="empty-state" id="emptyState">
+        <p>질문을 입력하면 답변, 신뢰도, 검증 결과를 확인할 수 있어요.</p>
+        <p>설정에서 "주장 판단하기"를 켜면 입력한 문장을 주장으로 분석합니다.</p>
+      </div>
+    </div>
+    <form class="input-bar" id="inputForm">
+      <textarea id="userInput" placeholder="궁금한 것을 물어보세요..." rows="1"></textarea>
+      <button type="submit" id="sendBtn">전송</button>
+    </form>
+  </main>
+</div>
+<div class="modal-overlay" id="settingsOverlay">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>설정</h2>
+      <button id="closeSettingsBtn" class="modal-close" title="닫기">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="setting-row">
+        <div class="setting-text">
+          <span class="setting-label">다크 모드</span>
+          <p class="setting-desc">화면을 어둡게 표시합니다.</p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="darkModeToggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="setting-row">
+        <div class="setting-text">
+          <span class="setting-label">주장 판단하기</span>
+          <p class="setting-desc">입력한 문장을 주장으로 보고 찬성·중립·반대 입장과 논리적 허점을 분석합니다.</p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="claimModeToggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="setting-row">
+        <div class="setting-text">
+          <span class="setting-label">신뢰도 표시</span>
+          <p class="setting-desc">답변에 대한 AI 스스로의 신뢰도(%)를 게이지로 보여줍니다.</p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="confidenceToggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="setting-row">
+        <div class="setting-text">
+          <span class="setting-label">교차 검증</span>
+          <p class="setting-desc">다른 AI가 답변을 다시 검토해 정확한 부분과 주의할 부분을 표시합니다.</p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="verificationToggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="setting-row">
+        <div class="setting-text">
+          <span class="setting-label">자료 출처 표시</span>
+          <p class="setting-desc">답변의 근거 출처를 표시합니다. AI가 스스로 밝히는 출처이며, 실제 웹 검색 결과가 아니므로 참고용으로만 사용하세요.</p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="sourceToggle">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="setting-row column">
+        <span class="setting-label">사용자 지정 기능</span>
+        <p class="setting-desc">AI가 답변할 때 항상 지켜야 할 규칙이나 원하는 기능을 자유롭게 입력하세요.</p>
+        <textarea id="customInstructionInput" class="custom-instruction-input" rows="3" placeholder="예: 답변할 때 항상 예시를 하나씩 들어줘 / 항상 존댓말로 답해줘"></textarea>
+        <button id="saveCustomBtn" class="save-custom-btn">저장</button>
+        <span class="save-status" id="saveStatus"></span>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
