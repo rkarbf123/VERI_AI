@@ -1,7 +1,5 @@
 const CONFIG = {
-  API_KEY: "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",
-  // ⬆️⬆️⬆️ ------------------------------------------ ⬆️⬆️⬆️
-
+  API_KEY: "api키넣기",
   API_URL: "https://api.openai.com/v1/chat/completions",
   MODEL: "gpt-4o-mini", // 사용모델
   MAX_HISTORY_TURNS: 15, // 몇 턴까지 기억?
